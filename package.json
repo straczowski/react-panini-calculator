@@ -11,6 +11,8 @@
   "author": "Elasticbrains GmbH",
   "license": "ISC",
   "dependencies": {
+    "@material-ui/core": "^3.5.1",
+    "@material-ui/icons": "^3.0.1",
     "@types/react": "^16.7.6",
     "@types/react-dom": "^16.0.9",
     "@types/react-redux": "^6.0.9",

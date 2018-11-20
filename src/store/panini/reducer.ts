@@ -8,7 +8,8 @@ const initialState: PaniniState = {
 const reducer: Reducer<PaniniState> = (state = initialState, action) => {
 	switch (action.type) {
 		case PaniniActionTypes.PANINI_SET_PLAYERS: {
-			return { ...state, loading: true }
+			console.log("yo" , state, action);
+			return { ...state, players: action.payload }
 		}
 		default: {
 			return state

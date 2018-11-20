@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Dispatch } from 'redux';
-import * as PropTypes from 'prop-types'
 import { setPlayers, paniniReducer } from '../store/panini';
 import { connect } from 'react-redux';
 import { ApplicationState} from '../store';
@@ -17,7 +16,8 @@ interface StateProps {
 }
 
 interface DispatchProps {
-    setPlayers: () => void
+    // setPlayers: (players: number) => void
+    setPlayers: typeof setPlayers
 }
 
 type Props = StateProps & DispatchProps & HelloComponentProps;
@@ -27,9 +27,17 @@ interface State {
 }
 
 class HelloComponent extends React.Component<Props, State> {
+
+    handleClick(event: React.MouseEvent<HTMLElement>) {
+        this.props.setPlayers(3);
+    }
+
     render() {
-        const { players, setPlayers } = this.props;
-        return <h1>Hello {players} from {this.props.compiler} and {this.props.framework}!</h1>;
+        const { players } = this.props;
+        return <div className="hello-component">
+            <h1>Hello {players} from {this.props.compiler} and {this.props.framework}!</h1>
+            <button onClick={e => this.handleClick(e)}> Set Player </button>
+        </div>;
     }
 }
 
@@ -37,8 +45,8 @@ const mapStateToProps = (state: ApplicationState): StateProps => ({
     players: state.panini.players
 })
 
-const mapDispatchToProps = (dispatch: Dispatch, ownProps: HelloComponentProps): DispatchProps => ({
-    setPlayers: () => dispatch(setPlayers(1))
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
+    setPlayers: (players: number) => dispatch(setPlayers(players))
 });
 
 // connect<StateProps, DispatchProps, HelloComponentProps>

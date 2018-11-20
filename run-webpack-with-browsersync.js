@@ -26,7 +26,7 @@ function runWebpack() {
 }
 
 runWebpack();
-bs.watch('./**/*.tsx').on('change', runWebpack);
+bs.watch('./src').on('change', runWebpack);
 
 
 

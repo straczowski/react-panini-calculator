@@ -1,4 +1,3 @@
-// const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -14,7 +13,7 @@ module.exports = {
 
     module: {
         rules: [
-            { test: /\.tsx?$/, loader: "ts-loader" }, // alternative: "awesome-typescript-loader"
+            { test: /\.tsx?$/, loader: "ts-loader" }, // alternative: "awesome-typescript-loader", ts-loader is faster
             { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
         ]
     },

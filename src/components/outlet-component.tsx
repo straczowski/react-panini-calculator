@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Dispatch } from 'redux';
 import { ApplicationState } from '../store';
-import { showConfigPage, showPaniniPage } from '../store/layout';
+import { showConfigPage, showPaniniPage, resetApplication } from '../store/layout';
 import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
@@ -25,6 +25,7 @@ interface StateProps {
 interface DispatchProps {
 	showConfigPage: typeof showConfigPage;
 	showPaniniPage: typeof showPaniniPage;
+	resetApplication: typeof resetApplication;
 }
 
 type Props = StateProps & DispatchProps & ComponentProps;
@@ -35,8 +36,8 @@ interface State {
 
 class OutletComponent extends React.Component<Props, State> {
 
-	handleClick() {
-
+	handleClick(e: any) {
+		this.props.resetApplication();
 	}
 
 	getOutletConent(): React.ReactFragment {
@@ -60,7 +61,7 @@ class OutletComponent extends React.Component<Props, State> {
 							</Grid>
 							<Grid item xs={12} sm={3}>
 								
-								<Button onClick={this.handleClick} style={{float: 'right'}}>
+								<Button onClick={e => this.handleClick(e)} style={{float: 'right'}}>
 									Reset
 								</Button>
 							</Grid>
@@ -78,7 +79,8 @@ const mapStateToProps = (state: ApplicationState): StateProps => ({
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 	showConfigPage: () => dispatch(showConfigPage()),
-	showPaniniPage: () => dispatch(showPaniniPage())
+	showPaniniPage: () => dispatch(showPaniniPage()),
+	resetApplication: () => dispatch(resetApplication())
 });
 
 export default connect<StateProps, DispatchProps, ComponentProps>(mapStateToProps, mapDispatchToProps)(OutletComponent);

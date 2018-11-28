@@ -1,5 +1,6 @@
 import { Reducer } from 'redux';
 import { PaniniState, PaniniActionTypes } from './model';
+import { LayoutActionTypes } from '../layout';
 
 const initialState: PaniniState = {
 	players: 0,
@@ -19,6 +20,13 @@ const reducer: Reducer<PaniniState> = (state = initialState, action) => {
 			console.log(sum);
 
 			return action.payload
+		}
+		case LayoutActionTypes.RESET_APPLICATION: {
+			return {
+				players: 0,
+				stickerPerPack: 0,
+				pricePerPack: 0
+			}
 		}
 		default: {
 			return state

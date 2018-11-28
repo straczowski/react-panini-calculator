@@ -27,6 +27,12 @@ const reducer: Reducer<LayoutState> = (state = initialState, action) => {
 				showPaniniPage: true
 			}
 		}
+		case LayoutActionTypes.RESET_APPLICATION: {
+			return {
+				showConfigPage: true,
+				showPaniniPage: false
+			}
+		}
 		default: {
 			return state
 		}

@@ -32,7 +32,6 @@ interface State {
 class ConfiguratorComponent extends React.Component<Props, State> {
 	
 	handleClick = () => {
-		console.log('click');
 		this.props.setConfiguration({
 			players: this.state.playersInput,
 			stickerPerPack: this.state.stickerPerPackInput,
@@ -41,17 +40,14 @@ class ConfiguratorComponent extends React.Component<Props, State> {
     }
 
     handlePlayerInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-		console.log('playersInput', (event.target as any).value);
 		this.setState((current) => ({ ...current, playersInput: (event.target as any).value }));
 	}
 	
 	handleStickerPerPackInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-		console.log('stickerPerPackInput', (event.target as any).value);
 		this.setState((current) => ({ ...current, stickerPerPackInput: (event.target as any).value }));
 	}
 	
 	handlePricePerPackInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-		console.log('pricePerPackInput', (event.target as any).value);
 		this.setState((current) => ({ ...current, pricePerPackInput: (event.target as any).value }));
 	}
 
@@ -93,7 +89,7 @@ class ConfiguratorComponent extends React.Component<Props, State> {
 
 				<Grid item xs={12}>
 					<Button variant="contained" color="primary" onClick={this.handleClick}>
-						Set Configuration
+						Play Panini
 					</Button>
 				</Grid>
             </Grid>

@@ -1,5 +1,6 @@
 import { Reducer } from 'redux';
 import { LayoutState, LayoutActionTypes } from './model';
+import { PaniniActionTypes } from '../panini';
 
 const initialState: LayoutState = {
 	showConfigPage: true,
@@ -15,6 +16,12 @@ const reducer: Reducer<LayoutState> = (state = initialState, action) => {
 			}
 		}
 		case LayoutActionTypes.SHOW_PANINI_PAGE: {
+			return {
+				showConfigPage: false,
+				showPaniniPage: true
+			}
+		}
+		case PaniniActionTypes.PANINI_SET_CONFIG: {
 			return {
 				showConfigPage: false,
 				showPaniniPage: true

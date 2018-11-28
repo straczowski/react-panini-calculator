@@ -13,22 +13,20 @@ export interface ComponentProps {
 }
 
 // props from redux store
-interface StateProps {
+interface ReduxProps {
     players: number
 }
 
 interface DispatchProps {
-    // setPlayers: (players: number) => void
-    // setPlayers: typeof setPlayers
 }
 
-type Props = StateProps & DispatchProps & ComponentProps;
+type Props = ReduxProps & DispatchProps & ComponentProps;
 
 interface State {
     internalComponentStateField: string
 }
 
-class HelloComponent extends React.Component<Props, State> {
+class PaniniAlbumComponent extends React.Component<Props, State> {
 
     handleClick(event: React.MouseEvent<HTMLElement>) {
         // this.props.setPlayers(3);
@@ -53,17 +51,15 @@ class HelloComponent extends React.Component<Props, State> {
             return paniniCards;
         }
 
-        return <div className="hello-component">
-            {players}
-        
-            <Grid container spacing={24}>
-                {cards()}
-            </Grid>
-        </div>;
+        return  <div className="hello-component">
+                    <Grid container spacing={24}>
+                        {cards()}
+                    </Grid>
+                </div>;
     }
 }
 
-const mapStateToProps = (state: ApplicationState): StateProps => ({
+const mapStateToProps = (state: ApplicationState): ReduxProps => ({
     players: state.panini.players
 })
 
@@ -72,4 +68,4 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 });
 
 // connect<StateProps, DispatchProps, HelloComponentProps>
-export default connect<StateProps, DispatchProps, ComponentProps>(mapStateToProps, mapDispatchToProps)(HelloComponent);
+export default connect<ReduxProps, DispatchProps, ComponentProps>(mapStateToProps, mapDispatchToProps)(PaniniAlbumComponent);

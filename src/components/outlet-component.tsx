@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 
-import HelloComponent from './hello-component';
+import HelloComponent from './panini-album-component';
 import ConfiguratorComponent from './configurator-component';
 import PredictionComponent from './prediction-component';
 

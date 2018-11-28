@@ -1,10 +1,4 @@
 import * as React from "react";
-import { Dispatch } from 'redux';
-import { connect } from 'react-redux';
-import { ApplicationState} from '../store';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
 
 // props from parent
 export interface PaniniCardProps { 

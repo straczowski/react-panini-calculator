@@ -5,6 +5,7 @@ import { showConfigPage, showPaniniPage } from '../store/layout';
 import { connect } from 'react-redux';
 
 import HelloComponent from './hello-component';
+import ConfiguratorComponent from './configurator-component';
 
 // props from parent component
 export interface ComponentProps {
@@ -14,8 +15,8 @@ export interface ComponentProps {
 
 // props from redux store
 interface StateProps {
-	showConfigPage: boolean;
-	showPaniniPage: boolean;
+	configPage: boolean;
+	paniniPage: boolean;
 }
 
 // Actions
@@ -34,10 +35,11 @@ class OutletComponent extends React.Component<Props, State> {
 
 	getOutletConent(): React.ReactFragment {
 		let outlet;
-		if (this.props.showConfigPage) {
-			outlet = <HelloComponent />
+		console.log(this.props.configPage);
+		if (this.props.configPage) {
+			outlet = <ConfiguratorComponent />
 		}
-		if (this.props.showPaniniPage) {
+		if (this.props.paniniPage) {
 			outlet = <HelloComponent />
 		}
 		return outlet
@@ -52,8 +54,8 @@ class OutletComponent extends React.Component<Props, State> {
 }
 
 const mapStateToProps = (state: ApplicationState): StateProps => ({
-	showConfigPage: state.layout.showConfigPage,
-	showPaniniPage: state.layout.showPaniniPage
+	configPage: state.layout.showConfigPage,
+	paniniPage: state.layout.showPaniniPage
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({

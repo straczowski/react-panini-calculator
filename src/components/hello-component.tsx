@@ -55,44 +55,6 @@ class HelloComponent extends React.Component<Props, State> {
 
         return <div className="hello-component">
             {players}
-            <Grid container spacing={24}>
-                <Grid item xs={12}>
-                    <TextField
-                        id="players"
-                        label="Players"
-                        className={'text-field'}
-                        type="number"
-                        onChange={this.handleChange}
-                        margin="normal"
-                        variant="filled"
-                        style={{marginRight: 10}}
-                    />
-                    
-                    <TextField
-                        id="filled-name"
-                        label="Sticker per Pack"
-                        className={'text-field'}
-                        type="number"
-                        onChange={this.handleChange}
-                        margin="normal"
-                        variant="filled"
-                        style={{marginRight: 10}}
-                    />
-                    <TextField
-                        id="filled-name"
-                        label="Price per Pack"
-                        className={'text-field'}
-                        type="number"
-                        onChange={this.handleChange}
-                        margin="normal"
-                        variant="filled"
-                    />
-                </Grid>
-            </Grid>
-
-            <Button variant="contained" color="primary" onClick={e => this.handleClick(e)}>
-                Set Configuration
-            </Button>
         
             <Grid container spacing={24}>
                 {cards()}

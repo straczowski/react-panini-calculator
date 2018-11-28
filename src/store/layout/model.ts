@@ -1,5 +1,5 @@
 export interface Layout {
-	// players: number;
+	// 
 }
 
 export const enum LayoutActionTypes {

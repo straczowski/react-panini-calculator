@@ -6,6 +6,7 @@ import { ApplicationState} from '../store';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
+import PaniniCardComponent from './panini-card-component';
 
 // props frmo parent
 export interface HelloComponentProps { 
@@ -41,6 +42,19 @@ class HelloComponent extends React.Component<Props, State> {
 
     render() {
         const { players } = this.props;
+
+        const cards = () => {
+            let paniniCards = [];
+            
+            for (let i = 1; i <= 720; i++) {
+                paniniCards.push(<Grid key={i} item xs={1}>
+                                    <PaniniCardComponent key={i} label={i} hits={0} />
+                                </Grid>)
+            }
+
+            return paniniCards;
+        }
+
         return <div className="hello-component">
             <h1>Hello {players} from {this.props.compiler} and {this.props.framework}!</h1>
 
@@ -65,6 +79,16 @@ class HelloComponent extends React.Component<Props, State> {
                         onChange={this.handleChange}
                         margin="normal"
                         variant="filled"
+                        style={{marginRight: 10}}
+                    />
+                    <TextField
+                        id="filled-name"
+                        label="Price per Pack"
+                        className={'text-field'}
+                        type="number"
+                        onChange={this.handleChange}
+                        margin="normal"
+                        variant="filled"
                     />
                 </Grid>
             </Grid>
@@ -72,6 +96,10 @@ class HelloComponent extends React.Component<Props, State> {
             <Button variant="contained" color="primary" onClick={e => this.handleClick(e)}>
                 Set Configuration
             </Button>
+        
+            <Grid container spacing={24}>
+                {cards()}
+            </Grid>
         </div>;
     }
 }

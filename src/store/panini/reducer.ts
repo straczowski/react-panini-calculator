@@ -2,7 +2,9 @@ import { Reducer } from 'redux';
 import { PaniniState, PaniniActionTypes } from './model';
 
 const initialState: PaniniState = {
-	players: 0 
+	players: 0,
+	stickerPerPack: 0,
+	pricePerPack: 0
 }
 
 const reducer: Reducer<PaniniState> = (state = initialState, action) => {

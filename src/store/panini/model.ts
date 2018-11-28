@@ -7,5 +7,7 @@ export const enum PaniniActionTypes {
 }
 
 export interface PaniniState {
-	readonly players: number
+	readonly players: number;
+	readonly stickerPerPack: number;
+	readonly pricePerPack: number;
 }

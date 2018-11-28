@@ -3,6 +3,7 @@ import { Dispatch } from 'redux';
 import { ApplicationState } from '../store';
 import { connect } from 'react-redux';
 import { setConfiguration, PaniniConfiguration } from '../store/panini';
+import { showPaniniPage } from '../store/layout';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -21,7 +22,8 @@ interface ReduxProps {
 }
 
 interface DispatchProps {
-    setConfiguration: typeof setConfiguration;
+	setConfiguration: typeof setConfiguration;
+	showPaniniPage: typeof showPaniniPage;
 }
 
 type Props = ReduxProps & DispatchProps & ComponentProps;
@@ -40,6 +42,7 @@ class ConfiguratorComponent extends React.Component<Props, State> {
 			stickerPerPack: this.state.stickerPerPackInput,
 			pricePerPack: this.state.pricePerPackInput
 		});
+		this.props.showPaniniPage();
 	}
 	
 	componentDidMount() {
@@ -53,14 +56,29 @@ class ConfiguratorComponent extends React.Component<Props, State> {
 
     handlePlayerInput = (e: React.ChangeEvent<HTMLInputElement>) => {
 		this.setState((current) => ({ ...current, playersInput: (event.target as any).value }));
+		this.props.setConfiguration({
+			players: (event.target as any).value,
+			pricePerPack: this.state.pricePerPackInput,
+			stickerPerPack: this.state.stickerPerPackInput
+		})
 	}
 	
 	handleStickerPerPackInput = (e: React.ChangeEvent<HTMLInputElement>) => {
 		this.setState((current) => ({ ...current, stickerPerPackInput: (event.target as any).value }));
+		this.props.setConfiguration({
+			players: this.state.playersInput,
+			pricePerPack: this.state.pricePerPackInput,
+			stickerPerPack: (event.target as any).value
+		})
 	}
 	
 	handlePricePerPackInput = (e: React.ChangeEvent<HTMLInputElement>) => {
 		this.setState((current) => ({ ...current, pricePerPackInput: (event.target as any).value }));
+		this.props.setConfiguration({
+			players: this.state.playersInput,
+			pricePerPack: (event.target as any).value,
+			stickerPerPack: this.state.stickerPerPackInput
+		})
 	}
 
 	render() {
@@ -122,7 +140,8 @@ const mapStateToProps = (state: ApplicationState): ReduxProps => ({
 })
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-    setConfiguration: (config: PaniniConfiguration) => dispatch(setConfiguration(config))
+	setConfiguration: (config: PaniniConfiguration) => dispatch(setConfiguration(config)),
+	showPaniniPage: () => dispatch(showPaniniPage())
 });
 
 export default connect<ReduxProps, DispatchProps, ComponentProps>(mapStateToProps, mapDispatchToProps)(ConfiguratorComponent);

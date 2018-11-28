@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button';
 
 import HelloComponent from './hello-component';
 import ConfiguratorComponent from './configurator-component';
+import PredictionComponent from './prediction-component';
 
 // props from parent component
 export interface ComponentProps {
@@ -60,12 +61,12 @@ class OutletComponent extends React.Component<Props, State> {
 								<h1>Panini Calculator</h1>
 							</Grid>
 							<Grid item xs={12} sm={3}>
-								
 								<Button onClick={e => this.handleClick(e)} style={{float: 'right'}}>
 									Reset
 								</Button>
 							</Grid>
 						</Grid>
+						<PredictionComponent />
 						{this.getOutletConent()}
 					</div>
 				</div>;

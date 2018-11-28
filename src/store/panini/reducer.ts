@@ -3,9 +3,14 @@ import { PaniniState, PaniniActionTypes } from './model';
 import { LayoutActionTypes } from '../layout';
 
 const initialState: PaniniState = {
-	players: 0,
-	stickerPerPack: 0,
-	pricePerPack: 0
+	players: 540,
+	stickerPerPack: 5,
+	pricePerPack: 0.6,
+	prediction: {
+		avgOfStickersNeeded: 5317,
+		avgOfPacksToBuy: 1063,
+		avgMoneyToInvest: 637.8
+	}
 }
 
 const reducer: Reducer<PaniniState> = (state = initialState, action) => {
@@ -19,14 +24,15 @@ const reducer: Reducer<PaniniState> = (state = initialState, action) => {
 			const sum = action.payload.players * c;
 			console.log(sum);
 
-			return action.payload
+			return {
+				...state,
+				players: action.payload.players,
+				stickerPerPack: action.payload.stickerPerPack,
+				pricePerPack: action.payload.pricePerPack,
+			}
 		}
 		case LayoutActionTypes.RESET_APPLICATION: {
-			return {
-				players: 0,
-				stickerPerPack: 0,
-				pricePerPack: 0
-			}
+			return initialState
 		}
 		default: {
 			return state

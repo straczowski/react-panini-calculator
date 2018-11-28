@@ -5,7 +5,7 @@ export interface PaniniConfiguration {
 }
 
 export interface PaniniPrediction {
-	avgOfStickersToBuy: number;
+	avgOfStickersNeeded: number;
 	avgOfPacksToBuy: number;
 	avgMoneyToInvest: number;
 }
@@ -18,4 +18,5 @@ export interface PaniniState {
 	readonly players: number;
 	readonly stickerPerPack: number;
 	readonly pricePerPack: number;
+	readonly prediction: PaniniPrediction;
 }

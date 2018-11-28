@@ -4,6 +4,12 @@ export interface PaniniConfiguration {
 	pricePerPack: number;
 }
 
+export interface PaniniPrediction {
+	avgOfStickersToBuy: number;
+	avgOfPacksToBuy: number;
+	avgMoneyToInvest: number;
+}
+
 export const enum PaniniActionTypes {
 	PANINI_SET_CONFIG = '@@panini/PANINI_SET_CONFIG'
 }

@@ -47,8 +47,10 @@ class OutletComponent extends React.Component<Props, State> {
 
 	render() {
 		return 	<div className="outlet-component">
-            		<h1>Hello from {this.props.compiler} and {this.props.framework}!</h1>
-					{this.getOutletConent()}
+					<div style={{ padding: 20 }}>
+						<h1>Hello from {this.props.compiler} and {this.props.framework}!</h1>
+						{this.getOutletConent()}
+					</div>
 				</div>;
 	}
 }

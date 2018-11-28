@@ -7,6 +7,7 @@ import { setConfiguration, PaniniConfiguration } from '../store/panini';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
+import InputAdornment from '@material-ui/core/InputAdornment';
 
 // props from parent
 export interface ComponentProps { 
@@ -60,6 +61,7 @@ class ConfiguratorComponent extends React.Component<Props, State> {
                         label="Players"
                         className={'text-field'}
                         type="number"
+						defaultValue="740"
 						onChange={this.handlePlayerInput}
                         margin="normal"
                         variant="filled"
@@ -71,6 +73,7 @@ class ConfiguratorComponent extends React.Component<Props, State> {
                         label="Sticker per Pack"
                         className={'text-field'}
                         type="number"
+						defaultValue="5"
                         onChange={this.handleStickerPerPackInput}
                         margin="normal"
                         variant="filled"
@@ -81,9 +84,13 @@ class ConfiguratorComponent extends React.Component<Props, State> {
                         label="Price per Pack"
                         className={'text-field'}
 						type="number"
+						defaultValue="0.60"
 						onChange={this.handlePricePerPackInput}
                         margin="normal"
-                        variant="filled"
+						variant="filled"
+						inputProps={{
+						  'step': '0.01',
+						}}
                     />
                 </Grid>
 

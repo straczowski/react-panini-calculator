@@ -14,15 +14,17 @@ export interface ComponentProps {
 }
 
 // props from redux store
-interface StateProps {
-    players: number
+interface ReduxProps {
+	players: number;
+	stickerPerPack: number;
+	pricePerPack: number;
 }
 
 interface DispatchProps {
     setConfiguration: typeof setConfiguration;
 }
 
-type Props = StateProps & DispatchProps & ComponentProps;
+type Props = ReduxProps & DispatchProps & ComponentProps;
 
 interface State {
 	playersInput: number;
@@ -38,7 +40,16 @@ class ConfiguratorComponent extends React.Component<Props, State> {
 			stickerPerPack: this.state.stickerPerPackInput,
 			pricePerPack: this.state.pricePerPackInput
 		});
-    }
+	}
+	
+	componentDidMount() {
+		this.setState((current) => ({ 
+			...current, 
+			playersInput: this.props.players,
+			stickerPerPackInput: this.props.stickerPerPack,
+			pricePerPackInput: this.props.pricePerPack
+		}));
+	}
 
     handlePlayerInput = (e: React.ChangeEvent<HTMLInputElement>) => {
 		this.setState((current) => ({ ...current, playersInput: (event.target as any).value }));
@@ -104,12 +115,14 @@ class ConfiguratorComponent extends React.Component<Props, State> {
 	}
 }
 
-const mapStateToProps = (state: ApplicationState): StateProps => ({
-    players: state.panini.players
+const mapStateToProps = (state: ApplicationState): ReduxProps => ({
+	players: state.panini.players,
+	stickerPerPack: state.panini.stickerPerPack,
+	pricePerPack: state.panini.pricePerPack
 })
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
     setConfiguration: (config: PaniniConfiguration) => dispatch(setConfiguration(config))
 });
 
-export default connect<StateProps, DispatchProps, ComponentProps>(mapStateToProps, mapDispatchToProps)(ConfiguratorComponent);
+export default connect<ReduxProps, DispatchProps, ComponentProps>(mapStateToProps, mapDispatchToProps)(ConfiguratorComponent);

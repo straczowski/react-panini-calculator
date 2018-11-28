@@ -3,6 +3,8 @@ import { Dispatch } from 'redux';
 import { ApplicationState } from '../store';
 import { showConfigPage, showPaniniPage } from '../store/layout';
 import { connect } from 'react-redux';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
 
 import HelloComponent from './hello-component';
 import ConfiguratorComponent from './configurator-component';
@@ -33,6 +35,10 @@ interface State {
 
 class OutletComponent extends React.Component<Props, State> {
 
+	handleClick() {
+
+	}
+
 	getOutletConent(): React.ReactFragment {
 		let outlet;
 
@@ -48,7 +54,17 @@ class OutletComponent extends React.Component<Props, State> {
 	render() {
 		return 	<div className="outlet-component">
 					<div style={{ padding: 20 }}>
-						<h1>Hello from {this.props.compiler} and {this.props.framework}!</h1>
+						<Grid container spacing={24}>
+							<Grid item xs={12} sm={9}>
+								<h1>Panini Calculator</h1>
+							</Grid>
+							<Grid item xs={12} sm={3}>
+								
+								<Button onClick={this.handleClick} style={{float: 'right'}}>
+									Reset
+								</Button>
+							</Grid>
+						</Grid>
 						{this.getOutletConent()}
 					</div>
 				</div>;

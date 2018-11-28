@@ -1,20 +1,18 @@
 import * as React from "react";
 import { Dispatch } from 'redux';
-import { setPlayers, paniniReducer } from '../store/panini';
+import { setPlayers } from '../store/panini';
 import { connect } from 'react-redux';
-import { ApplicationState} from '../store';
+import { ApplicationState } from '../store';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import PaniniCardComponent from './panini-card-component';
 
-// props frmo parent
-export interface HelloComponentProps { 
-    compiler: string;
-    framework: string;
+// props from parent
+export interface ComponentProps { 
 }
 
-// Props from Redux Store
+// props from redux store
 interface StateProps {
     players: number
 }
@@ -24,7 +22,7 @@ interface DispatchProps {
     setPlayers: typeof setPlayers
 }
 
-type Props = StateProps & DispatchProps & HelloComponentProps;
+type Props = StateProps & DispatchProps & ComponentProps;
 
 interface State {
     internalComponentStateField: string
@@ -56,8 +54,7 @@ class HelloComponent extends React.Component<Props, State> {
         }
 
         return <div className="hello-component">
-            <h1>Hello {players} from {this.props.compiler} and {this.props.framework}!</h1>
-
+            {players}
             <Grid container spacing={24}>
                 <Grid item xs={12}>
                     <TextField
@@ -113,4 +110,4 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 });
 
 // connect<StateProps, DispatchProps, HelloComponentProps>
-export default connect<StateProps, DispatchProps, HelloComponentProps>(mapStateToProps, mapDispatchToProps)(HelloComponent);
+export default connect<StateProps, DispatchProps, ComponentProps>(mapStateToProps, mapDispatchToProps)(HelloComponent);

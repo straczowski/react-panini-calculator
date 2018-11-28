@@ -1,10 +1,12 @@
 import { combineReducers, Dispatch, Reducer, Action, AnyAction } from 'redux'
 // import { routerReducer, RouterState } from 'react-router-redux'
 import { PaniniState, paniniReducer } from './panini'
+import { LayoutState, layoutReducer } from './layout';
 
 // The top-level state object.
 export interface ApplicationState {
-  panini: PaniniState
+  panini: PaniniState,
+  layout: LayoutState
 }
 
 // Whenever an action is dispatched, Redux will update each top-level application state property
@@ -12,6 +14,7 @@ export interface ApplicationState {
 // the reducer acts on the corresponding ApplicationState property type.
 export const rootReducer = combineReducers<ApplicationState>({
   panini: paniniReducer,
-})
+  layout: layoutReducer
+});
 
 // export * from './panini';

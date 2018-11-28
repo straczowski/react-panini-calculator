@@ -1,4 +1,4 @@
 import { action } from 'typesafe-actions';
-import { PaniniActionTypes } from './model';
+import { PaniniActionTypes, PaniniConfiguration } from './model';
 
-export const setPlayers = (players: number) => action(PaniniActionTypes.PANINI_SET_PLAYERS, players)
+export const setConfiguration = (config: PaniniConfiguration) => action(PaniniActionTypes.PANINI_SET_CONFIG, config)

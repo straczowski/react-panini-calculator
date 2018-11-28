@@ -35,7 +35,7 @@ class OutletComponent extends React.Component<Props, State> {
 
 	getOutletConent(): React.ReactFragment {
 		let outlet;
-		console.log(this.props.configPage);
+
 		if (this.props.configPage) {
 			outlet = <ConfiguratorComponent />
 		}

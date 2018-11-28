@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Dispatch } from 'redux';
-import { setPlayers } from '../store/panini';
+// import { setPlayers } from '../store/panini';
 import { connect } from 'react-redux';
 import { ApplicationState } from '../store';
 import Button from '@material-ui/core/Button';
@@ -19,7 +19,7 @@ interface StateProps {
 
 interface DispatchProps {
     // setPlayers: (players: number) => void
-    setPlayers: typeof setPlayers
+    // setPlayers: typeof setPlayers
 }
 
 type Props = StateProps & DispatchProps & ComponentProps;
@@ -31,7 +31,7 @@ interface State {
 class HelloComponent extends React.Component<Props, State> {
 
     handleClick(event: React.MouseEvent<HTMLElement>) {
-        this.props.setPlayers(3);
+        // this.props.setPlayers(3);
     }
 
     handleChange = (event: any) => {
@@ -68,7 +68,7 @@ const mapStateToProps = (state: ApplicationState): StateProps => ({
 })
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-    setPlayers: (players: number) => dispatch(setPlayers(players))
+    // setPlayers: (players: number) => dispatch(setPlayers(players))
 });
 
 // connect<StateProps, DispatchProps, HelloComponentProps>

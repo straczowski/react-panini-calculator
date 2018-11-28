@@ -2,7 +2,7 @@ import * as React from "react";
 import { Dispatch } from 'redux';
 import { ApplicationState } from '../store';
 import { connect } from 'react-redux';
-import { setPlayers } from '../store/panini';
+import { setConfiguration, PaniniConfiguration } from '../store/panini';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -18,7 +18,7 @@ interface StateProps {
 }
 
 interface DispatchProps {
-    setPlayers: (players: number) => void
+    setConfiguration: typeof setConfiguration;
 }
 
 type Props = StateProps & DispatchProps & ComponentProps;
@@ -31,8 +31,13 @@ interface State {
 
 class ConfiguratorComponent extends React.Component<Props, State> {
 	
-	handleClick = (event: any) => {
-        console.log(event);
+	handleClick = () => {
+		console.log('click');
+		this.props.setConfiguration({
+			players: this.state.playersInput,
+			stickerPerPack: this.state.stickerPerPackInput,
+			pricePerPack: this.state.pricePerPackInput
+		});
     }
 
     handlePlayerInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -87,7 +92,7 @@ class ConfiguratorComponent extends React.Component<Props, State> {
                 </Grid>
 
 				<Grid item xs={12}>
-					<Button variant="contained" color="primary" onClick={e => this.handleClick(e)}>
+					<Button variant="contained" color="primary" onClick={this.handleClick}>
 						Set Configuration
 					</Button>
 				</Grid>
@@ -101,7 +106,7 @@ const mapStateToProps = (state: ApplicationState): StateProps => ({
 })
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-    setPlayers: (players: number) => dispatch(setPlayers(players))
+    setConfiguration: (config: PaniniConfiguration) => dispatch(setConfiguration(config))
 });
 
 export default connect<StateProps, DispatchProps, ComponentProps>(mapStateToProps, mapDispatchToProps)(ConfiguratorComponent);

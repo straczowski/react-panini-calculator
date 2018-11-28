@@ -3,13 +3,18 @@ import { PaniniState, PaniniActionTypes } from './model';
 import { LayoutActionTypes } from '../layout';
 
 const initialState: PaniniState = {
-	players: 540,
+	players: 740,
 	stickerPerPack: 5,
 	pricePerPack: 0.6,
 	prediction: {
 		avgOfStickersNeeded: 5317,
 		avgOfPacksToBuy: 1063,
 		avgMoneyToInvest: 637.8
+	},
+	shop: {
+		filledAlbum: initPaniniAlbumArray(740),
+		moneyInvested: 0,
+		packsBought: 0
 	}
 }
 
@@ -31,6 +36,10 @@ const reducer: Reducer<PaniniState> = (state = initialState, action) => {
 				pricePerPack: action.payload.pricePerPack,
 			}
 		}
+		case PaniniActionTypes.BUY_PACK: {
+			console.log("buy ", action.payload)
+			return state
+		}
 		case LayoutActionTypes.RESET_APPLICATION: {
 			return initialState
 		}
@@ -38,6 +47,12 @@ const reducer: Reducer<PaniniState> = (state = initialState, action) => {
 			return state
 		}
 	}
+}
+
+
+function initPaniniAlbumArray(n: number): Array<number> {
+	var arr = Array.apply(null, Array(n));
+	return arr.map(() => { return 0 });
 }
 
 export { reducer as paniniReducer }

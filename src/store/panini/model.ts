@@ -10,8 +10,15 @@ export interface PaniniPrediction {
 	avgMoneyToInvest: number;
 }
 
+export interface PaniniShop {
+	packsBought: number;
+	moneyInvested: number;
+	filledAlbum: Array<number>;
+}
+
 export const enum PaniniActionTypes {
-	PANINI_SET_CONFIG = '@@panini/PANINI_SET_CONFIG'
+	PANINI_SET_CONFIG = '@@panini/PANINI_SET_CONFIG',
+	BUY_PACK = '@@panini/BUY_PACK'
 }
 
 export interface PaniniState {
@@ -19,4 +26,5 @@ export interface PaniniState {
 	readonly stickerPerPack: number;
 	readonly pricePerPack: number;
 	readonly prediction: PaniniPrediction;
+	readonly shop: PaniniShop;
 }

@@ -26,19 +26,45 @@ const reducer: Reducer<PaniniState> = (state = initialState, action) => {
 			for (let i = 1; i <= action.payload.players; i++) {
 				c = c + (1 / i);
 			}
-			const sum = action.payload.players * c;
-			console.log(sum);
+			const avgOfStickersNeeded = Math.round(action.payload.players * c);
+			const avgOfPacksToBuy = Math.round(avgOfStickersNeeded / action.payload.stickerPerPack);
+			const avgMoneyToInvest = Math.round( avgOfPacksToBuy * action.payload.pricePerPack * 100 ) / 100;
 
 			return {
 				...state,
 				players: action.payload.players,
 				stickerPerPack: action.payload.stickerPerPack,
 				pricePerPack: action.payload.pricePerPack,
+				prediction: {
+					avgOfStickersNeeded: avgOfStickersNeeded,
+					avgOfPacksToBuy: avgOfPacksToBuy,
+					avgMoneyToInvest: avgMoneyToInvest
+				}
 			}
 		}
 		case PaniniActionTypes.BUY_PACK: {
-			console.log("buy ", action.payload)
-			return state
+			const packsBought: number = state.shop.packsBought + Number(action.payload);
+			const moneyInvested: number = state.shop.moneyInvested + (action.payload * state.pricePerPack);
+			
+			let filledAlbum = state.shop.filledAlbum;
+
+			for (let x = 0; x < action.payload; x++) {
+				for (let y = 0; y < state.stickerPerPack; y++) {
+					const i = Math.floor(Math.random() * state.players);
+					filledAlbum[i] = filledAlbum[i] + 1;
+				}
+			}
+
+			console.log(filledAlbum);
+
+			return {
+				...state,
+				shop: {
+					packsBought: packsBought,
+					moneyInvested: moneyInvested,
+					filledAlbum: filledAlbum
+				}
+			}
 		}
 		case LayoutActionTypes.RESET_APPLICATION: {
 			return initialState

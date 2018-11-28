@@ -30,8 +30,15 @@ interface State {
 
 class PaniniShopComponent extends React.Component<Props, State> {
 
+	componentDidMount() {
+		this.setState((current) => ({ 
+			...current, 
+			backBuyInput: 1
+		}));
+	}
+
 	handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		this.setState((current) => ({ ...current, backBuyInput: (event.target as any).value }));
+		this.setState((current) => ({ ...current, backBuyInput: Number( (event.target as any).value )}));
 	}
 
 	handlePackBuy = () => {
@@ -42,7 +49,7 @@ class PaniniShopComponent extends React.Component<Props, State> {
 
         return  <div className="hello-component">
                     <Grid container spacing={8}>
-						<Grid item xs={12}>
+						<Grid item xs={12} style={{display: 'flex', alignItems: 'center'}}>
 							<TextField
 								id="filled-name"
 								label="Number of Packs"
@@ -59,6 +66,22 @@ class PaniniShopComponent extends React.Component<Props, State> {
 							</Button>
 						</Grid>
                     </Grid>
+
+                    <Grid container spacing={8}>
+						<Grid item xs={3}>
+							Packs Bought: 
+						</Grid>
+						<Grid item xs={9}>
+							{this.props.packsBought}
+						</Grid>
+
+						<Grid item xs={3}>
+							Money Invested: 
+						</Grid>
+						<Grid item xs={9}>
+							{this.props.moneyInvested}
+						</Grid>
+					</Grid>
                 </div>;
     }
 }

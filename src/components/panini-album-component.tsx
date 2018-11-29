@@ -38,7 +38,7 @@ class PaniniAlbumComponent extends React.Component<Props, State> {
             
             for (let i = 0; i < filledAlbum.length; i++) {
                 paniniCards.push(<Grid key={i} item xs={1}>
-                                    <PaniniCardComponent key={i} label={i} hits={filledAlbum[i]} />
+                                    <PaniniCardComponent key={i} label={i} />
                                 </Grid>)
             }
 

@@ -1,15 +1,28 @@
 import * as React from "react";
+import { Dispatch } from 'redux';
+import { ApplicationState } from '../store';
+import { connect } from 'react-redux';
+
 
 // props from parent
 export interface ComponentProps { 
     label: number;
-    hits: number;
 }
 
-class PaniniCardComponent extends React.Component<ComponentProps, {}> {
+// props from redux store
+interface ReduxProps {
+	filledAlbum: Array<number>;
+}
+
+interface DispatchProps {
+}
+
+type Props = ReduxProps & DispatchProps & ComponentProps;
+
+class PaniniCardComponent extends React.Component<Props, {}> {
 
 	private getBackgroundColor(): string {
-		if (this.props.hits > 0 ) {
+		if (this.props.filledAlbum[this.props.label] > 0 ) {
 			return 'lightgreen'
 		} else {
 			return 'lightgoldenrodyellow'
@@ -17,7 +30,7 @@ class PaniniCardComponent extends React.Component<ComponentProps, {}> {
 	}
 
 	private getBorder(): string {
-		if (this.props.hits > 0 ) {
+		if (this.props.filledAlbum[this.props.label] > 0 ) {
 			return '1px solid green'
 		} else {
 			return '1px solid orange'
@@ -25,7 +38,7 @@ class PaniniCardComponent extends React.Component<ComponentProps, {}> {
 	}
 
     render() {
-        const { label, hits } = this.props;
+        const { label, filledAlbum } = this.props;
 
 		return  <div className={"panini-card-component panini-card-component-" + label }
 					style={{
@@ -34,9 +47,16 @@ class PaniniCardComponent extends React.Component<ComponentProps, {}> {
 						border: this.getBorder(),
 						textAlign: 'center'
 					}}>
-					<div>{hits} h</div>
+					<div>{filledAlbum[label]} h</div>
 				</div>;
     }
 }
 
-export default PaniniCardComponent;
+const mapStateToProps = (state: ApplicationState): ReduxProps => ({
+	filledAlbum: state.panini.shop.filledAlbum,
+})
+
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
+});
+
+export default connect<ReduxProps, DispatchProps, ComponentProps>(mapStateToProps, mapDispatchToProps)(PaniniCardComponent);

@@ -55,8 +55,6 @@ const reducer: Reducer<PaniniState> = (state = initialState, action) => {
 				}
 			}
 
-			console.log(filledAlbum);
-
 			return {
 				...state,
 				shop: {

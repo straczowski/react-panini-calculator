@@ -3,22 +3,23 @@ import { PaniniState, PaniniActionTypes } from './model';
 import { LayoutActionTypes } from '../layout';
 
 const initialState: PaniniState = {
-	players: 740,
+	players: 682,
 	stickerPerPack: 5,
-	pricePerPack: 0.6,
+	pricePerPack: 0.9,
 	prediction: {
-		avgOfStickersNeeded: 5317,
-		avgOfPacksToBuy: 1063,
-		avgMoneyToInvest: 637.8
+		avgOfStickersNeeded: 4843,
+		avgOfPacksToBuy: 969,
+		avgMoneyToInvest: 871.8
 	},
 	shop: {
-		filledAlbum: initPaniniAlbumArray(740),
+		filledAlbum: initPaniniAlbumArray(682),
 		moneyInvested: 0,
 		packsBought: 0
 	}
 }
 
 const reducer: Reducer<PaniniState> = (state = initialState, action) => {
+
 	switch (action.type) {
 		case PaniniActionTypes.PANINI_SET_CONFIG: {
 
@@ -30,8 +31,9 @@ const reducer: Reducer<PaniniState> = (state = initialState, action) => {
 			const avgOfPacksToBuy = Math.round(avgOfStickersNeeded / action.payload.stickerPerPack);
 			const avgMoneyToInvest = Math.round( avgOfPacksToBuy * action.payload.pricePerPack * 100 ) / 100;
 
+			const filledAlbum = initPaniniAlbumArray(action.payload.players);
+
 			return {
-				...state,
 				players: action.payload.players,
 				stickerPerPack: action.payload.stickerPerPack,
 				pricePerPack: action.payload.pricePerPack,
@@ -39,6 +41,11 @@ const reducer: Reducer<PaniniState> = (state = initialState, action) => {
 					avgOfStickersNeeded: avgOfStickersNeeded,
 					avgOfPacksToBuy: avgOfPacksToBuy,
 					avgMoneyToInvest: avgMoneyToInvest
+				},
+				shop: {
+					filledAlbum: filledAlbum,
+					moneyInvested: 0,
+					packsBought: 0
 				}
 			}
 		}
@@ -75,8 +82,11 @@ const reducer: Reducer<PaniniState> = (state = initialState, action) => {
 
 
 function initPaniniAlbumArray(n: number): Array<number> {
-	var arr = Array.apply(null, Array(n));
-	return arr.map(() => { return 0 });
+	const arr = new Array(Number(n));
+	for (let i = 0; i < arr.length; i++) {
+		arr[i] = 0;
+	}
+	return arr
 }
 
 export { reducer as paniniReducer }

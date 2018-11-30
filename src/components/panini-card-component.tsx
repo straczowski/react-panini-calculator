@@ -12,6 +12,7 @@ export interface ComponentProps {
 // props from redux store
 interface ReduxProps {
 	filledAlbum: Array<number>;
+	bought: number;
 }
 
 interface DispatchProps {
@@ -38,7 +39,7 @@ class PaniniCardComponent extends React.Component<Props, {}> {
 	}
 
     render() {
-        const { label, filledAlbum } = this.props;
+		const { label } = this.props;
 
 		return  <div className={"panini-card-component panini-card-component-" + label }
 					style={{
@@ -47,13 +48,14 @@ class PaniniCardComponent extends React.Component<Props, {}> {
 						border: this.getBorder(),
 						textAlign: 'center'
 					}}>
-					<div>{filledAlbum[label]} h</div>
+					<div>{this.props.filledAlbum[label]}</div>
 				</div>;
     }
 }
 
 const mapStateToProps = (state: ApplicationState): ReduxProps => ({
 	filledAlbum: state.panini.shop.filledAlbum,
+	bought: state.panini.shop.packsBought
 })
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({

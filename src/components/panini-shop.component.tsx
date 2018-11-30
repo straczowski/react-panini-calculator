@@ -61,7 +61,7 @@ class PaniniShopComponent extends React.Component<Props, State> {
 								variant="filled"
 							/>
 
-							<Button variant="contained" color="primary" onClick={this.handlePackBuy}>
+							<Button variant="contained" color="primary" onClick={this.handlePackBuy} style={{paddingLeft: 8}}>
 								Buy Packs
 							</Button>
 						</Grid>

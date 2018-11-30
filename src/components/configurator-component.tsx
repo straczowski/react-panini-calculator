@@ -38,9 +38,9 @@ class ConfiguratorComponent extends React.Component<Props, State> {
 	
 	handleClick = () => {
 		this.props.setConfiguration({
-			players: this.state.playersInput,
-			stickerPerPack: this.state.stickerPerPackInput,
-			pricePerPack: this.state.pricePerPackInput
+			players: Number(this.state.playersInput),
+			stickerPerPack: Number(this.state.stickerPerPackInput),
+			pricePerPack: Number(this.state.pricePerPackInput)
 		});
 		this.props.showPaniniPage();
 	}
@@ -57,7 +57,7 @@ class ConfiguratorComponent extends React.Component<Props, State> {
     handlePlayerInput = (e: React.ChangeEvent<HTMLInputElement>) => {
 		this.setState((current) => ({ ...current, playersInput: (event.target as any).value }));
 		this.props.setConfiguration({
-			players: (event.target as any).value,
+			players: Number((event.target as any).value),
 			pricePerPack: this.state.pricePerPackInput,
 			stickerPerPack: this.state.stickerPerPackInput
 		})
@@ -68,7 +68,7 @@ class ConfiguratorComponent extends React.Component<Props, State> {
 		this.props.setConfiguration({
 			players: this.state.playersInput,
 			pricePerPack: this.state.pricePerPackInput,
-			stickerPerPack: (event.target as any).value
+			stickerPerPack: Number((event.target as any).value)
 		})
 	}
 	
@@ -76,7 +76,7 @@ class ConfiguratorComponent extends React.Component<Props, State> {
 		this.setState((current) => ({ ...current, pricePerPackInput: (event.target as any).value }));
 		this.props.setConfiguration({
 			players: this.state.playersInput,
-			pricePerPack: (event.target as any).value,
+			pricePerPack: Number((event.target as any).value),
 			stickerPerPack: this.state.stickerPerPackInput
 		})
 	}
@@ -90,7 +90,7 @@ class ConfiguratorComponent extends React.Component<Props, State> {
                         label="Players"
                         className={'text-field'}
                         type="number"
-						defaultValue="740"
+						defaultValue="682"
 						onChange={this.handlePlayerInput}
                         margin="normal"
                         variant="filled"
@@ -113,7 +113,7 @@ class ConfiguratorComponent extends React.Component<Props, State> {
                         label="Price per Pack"
                         className={'text-field'}
 						type="number"
-						defaultValue="0.60"
+						defaultValue="0.90"
 						onChange={this.handlePricePerPackInput}
                         margin="normal"
 						variant="filled"

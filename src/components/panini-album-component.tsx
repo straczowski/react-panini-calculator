@@ -1,10 +1,7 @@
 import * as React from "react";
 import { Dispatch } from 'redux';
-import { buyPack } from '../store/panini';
 import { connect } from 'react-redux';
 import { ApplicationState } from '../store';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 
 import PaniniCardComponent from './panini-card-component';
@@ -16,7 +13,8 @@ export interface ComponentProps {
 
 // props from redux store
 interface ReduxProps {
-	filledAlbum: Array<number>;
+    filledAlbum: Array<number>;
+    players: number;
 }
 
 interface DispatchProps {
@@ -55,11 +53,11 @@ class PaniniAlbumComponent extends React.Component<Props, State> {
 }
 
 const mapStateToProps = (state: ApplicationState): ReduxProps => ({
-	filledAlbum: state.panini.shop.filledAlbum
+    filledAlbum: state.panini.shop.filledAlbum,
+    players: state.panini.players
 })
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 });
 
-// connect<StateProps, DispatchProps, HelloComponentProps>
 export default connect<ReduxProps, DispatchProps, ComponentProps>(mapStateToProps, mapDispatchToProps)(PaniniAlbumComponent);
